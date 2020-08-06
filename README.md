@@ -7,6 +7,10 @@ A tool for exploring Probe Entertainment "Habitat" P3D files, used during the de
 
 This project contains two C# projects within it. The viewer application, and libhabitat. libhabitat can be used  to work with Habitat files in any .NET application.
 
+**Requirements**
+
+.NET Framework 4.6 or greater
+
 **Features**
 
 - Bitmap, palette, and texture mapping viewers
