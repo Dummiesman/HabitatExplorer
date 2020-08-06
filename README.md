@@ -20,7 +20,7 @@ This project contains two C# projects within it. The viewer application, and lib
 
 **Project Status**
 
-Most of the major things are implemented. Enums, property names, and a few others aren't yet implemented.
+As far as I'm aware all the types that exist in the P3D files available to us are implemented. The rest haven't been seen in the wild.
 
 **Known Issues**
 
