@@ -36,7 +36,7 @@ namespace HabitatExplorer.Previewers
             else if(record.DefaultValue.Type == typeof(EnumPropertyValue))
             {
                 var enumValueObj = (EnumPropertyValue)record.DefaultValue.Value;
-                var enumRecord = enumValueObj.EnumRecord?.Value;
+                var enumRecord = enumValueObj.EnumRecord.Value;
                 string enumName = enumRecord?.Name ?? "ENUM_NOT_FOUND";
                 string enumValue = string.IsNullOrEmpty(enumValueObj.Value) ? enumRecord?.Values.FirstOrDefault(x => x.Value == enumRecord.DefaultValue).Name ?? "ENUM_NOT_FOUND" :
                                                                               enumValueObj.Value;

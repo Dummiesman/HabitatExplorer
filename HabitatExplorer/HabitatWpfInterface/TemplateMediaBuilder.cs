@@ -33,7 +33,7 @@ namespace HabitatExplorer.HabitatWpfInterface
             Vector3D ourPosition = new Vector3D(0d, 0d, 0d);
             if (positionAtParent)
             {
-                HabitatTemplateRecord parent = template.Parent?.Value as HabitatTemplateRecord;
+                HabitatTemplateRecord parent = template.Parent.Value as HabitatTemplateRecord;
                 if(parent != null)
                 {
                     int parentPin = template.Anchor.PinId;
@@ -56,7 +56,7 @@ namespace HabitatExplorer.HabitatWpfInterface
                 if (face.Sides.Count < 3 || face.Sides.Count > 4)
                     return;
 
-                var bitmap = texture?.Bitmap?.Value;
+                var bitmap = texture?.Bitmap.Value;
                 if (bitmap != null && !texturedMeshBuilders.ContainsKey(bitmap.ObjectId))
                 {
                     texturedMeshBuilders[bitmap.ObjectId] = new MeshBuilder(true, true);
@@ -106,13 +106,13 @@ namespace HabitatExplorer.HabitatWpfInterface
 
             void addFaceFront(Face face)
             {
-                addFace(face, face.FrontTexture?.Value, false);
+                addFace(face, face.FrontTexture.Value, false);
             }
 
             void addFaceBack(Face face)
             {
-                if(face.BackTexture?.Value != null)
-                    addFace(face, face.BackTexture?.Value, true);
+                if(face.BackTexture.HasValue)
+                    addFace(face, face.BackTexture.Value, true);
             }
 
             foreach (var face in template.Faces)

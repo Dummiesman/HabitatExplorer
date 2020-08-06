@@ -17,7 +17,7 @@ namespace HabitatExplorer.Previewers
             if(record is HabitatTextureRecord textureRecord)
             {
                 //can't render anything here
-                if(!(textureRecord.Bitmap?.HasValue ?? false))
+                if(!textureRecord.Bitmap.HasValue)
                 {
                     return;
                 }

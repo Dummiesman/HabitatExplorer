@@ -18,11 +18,11 @@ namespace Habitat
 
     public class Face
     {
-        public List<FaceSide> Sides = new List<FaceSide>();
-        public List<Property> Properties = new List<Property>();
+        public readonly List<FaceSide> Sides = new List<FaceSide>();
+        public readonly List<Property> Properties = new List<Property>();
 
-        public HabitatRecordReference<HabitatTextureRecord> FrontTexture;
-        public HabitatRecordReference<HabitatTextureRecord> BackTexture;
+        public HabitatRecordReference<HabitatTextureRecord> FrontTexture = new HabitatRecordReference<HabitatTextureRecord>();
+        public HabitatRecordReference<HabitatTextureRecord> BackTexture = new HabitatRecordReference<HabitatTextureRecord>();
 
         public VertexOrient FrontOrient = default;
         public VertexOrient BackOrient = default;
@@ -56,10 +56,8 @@ namespace Habitat
             int frontTextureObjectId = reader.ReadInt32();
             int backTextureObjectId = reader.ReadInt32();
 
-            if (frontTextureObjectId != 0)
-                FrontTexture = new HabitatRecordReference<HabitatTextureRecord>(owner, frontTextureObjectId);
-            if (backTextureObjectId != 0)
-                BackTexture = new HabitatRecordReference<HabitatTextureRecord>(owner, backTextureObjectId);
+            FrontTexture = new HabitatRecordReference<HabitatTextureRecord>(owner, frontTextureObjectId);
+            BackTexture = new HabitatRecordReference<HabitatTextureRecord>(owner, backTextureObjectId);
 
             //Vertex orients
             FrontOrient = new VertexOrient()

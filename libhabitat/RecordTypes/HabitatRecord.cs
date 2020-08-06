@@ -10,8 +10,8 @@ namespace Habitat
     public class HabitatRecord
     {
         public HabitatDatabase Database { get; private set; }
-        public HabitatRecordReference<HabitatRecord> ParentFolder;
-        public bool HasFolder => ParentFolder?.HasValue ?? false;
+        public HabitatRecordReference<HabitatRecord> ParentFolder = new HabitatRecordReference<HabitatRecord>();
+        public bool HasFolder => ParentFolder.HasValue;
 
         public int ObjectId = -1;
         public string Name = "";
@@ -36,7 +36,7 @@ namespace Habitat
             {
                 byte listType = reader.ReadByte(); //this should always be 0
                 int folderId = reader.ReadInt32();
-                if(folderId != 0)
+                if(folderId != 0) //This check is here just in case there are two folders, one valid, one null. We take the valid one.
                     ParentFolder = new HabitatRecordReference<HabitatRecord>(owner, folderId);
             }
             

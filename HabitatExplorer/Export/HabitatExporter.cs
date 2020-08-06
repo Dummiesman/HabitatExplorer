@@ -19,20 +19,20 @@ namespace HabitatExplorer.Export
             //Bunch of helpers
             void addFace(HabitatTemplateRecord template, Face face, HabitatTextureRecord texture, bool backface)
             {
-                var bitmap = texture?.Bitmap?.Value;
+                var bitmap = texture?.Bitmap.Value;
                 if (bitmap != null)
                     exportBitmaps.Add(bitmap.ObjectId);
             }
 
             void addFaceFront(HabitatTemplateRecord template, Face face)
             {
-                addFace(template, face, face.FrontTexture?.Value, false);
+                addFace(template, face, face.FrontTexture.Value, false);
             }
 
             void addFaceBack(HabitatTemplateRecord template, Face face)
             {
-                if (face.BackTexture?.Value != null)
-                    addFace(template, face, face.BackTexture?.Value, true);
+                if (face.BackTexture.HasValue)
+                    addFace(template, face, face.BackTexture.Value, true);
             }
 
             void gatherTemplateTextures(HabitatTemplateRecord template)
@@ -96,7 +96,7 @@ namespace HabitatExplorer.Export
 
                 //First and foremost, get our position
                 Vector3 ourPosition = new Vector3(0f, 0f, 0f);
-                HabitatTemplateRecord parent = template.Parent?.Value as HabitatTemplateRecord;
+                HabitatTemplateRecord parent = template.Parent.Value as HabitatTemplateRecord;
                 if (parent != null)
                 {
                     int parentPin = template.Anchor.PinId;
@@ -109,7 +109,7 @@ namespace HabitatExplorer.Export
                 }
                 
 
-                var bitmap = texture?.Bitmap?.Value;
+                var bitmap = texture?.Bitmap.Value;
                 string materialName = (bitmap != null) ? bitmap.Name : "default";
                 builder.SetMaterial(materialName);
 
@@ -164,13 +164,13 @@ namespace HabitatExplorer.Export
 
             void addFaceFront(HabitatTemplateRecord template, Face face)
             {
-                addFace(template, face, face.FrontTexture?.Value, false);
+                addFace(template, face, face.FrontTexture.Value, false);
             }
 
             void addFaceBack(HabitatTemplateRecord template, Face face)
             {
-                if (face.BackTexture?.Value != null)
-                    addFace(template, face, face.BackTexture?.Value, true);
+                if (face.BackTexture.HasValue)
+                    addFace(template, face, face.BackTexture.Value, true);
             }
 
             void exportTemplate(HabitatTemplateRecord template)

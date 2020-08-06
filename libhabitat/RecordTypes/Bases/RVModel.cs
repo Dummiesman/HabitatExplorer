@@ -39,7 +39,7 @@ namespace Habitat
     public abstract class RVModel : HabitatPropertyRecord
     {
         public string OriginalName = string.Empty;
-        public HabitatRecordReference<HabitatRecord> Parent;
+        public HabitatRecordReference<HabitatRecord> Parent = new HabitatRecordReference<HabitatRecord>();
         public Anchor Anchor;
         public Vector3 Scale;
         public List<HabitatRecordReference<HabitatRecord>> ChildObjects = new List<HabitatRecordReference<HabitatRecord>>();
@@ -54,8 +54,7 @@ namespace Habitat
             OriginalName = Helpers.ReadCString(reader);
 
             int parentRecordObjectId = reader.ReadInt32();
-            if (parentRecordObjectId != 0)
-                Parent = new HabitatRecordReference<HabitatRecord>(owner, parentRecordObjectId);
+            Parent = new HabitatRecordReference<HabitatRecord>(owner, parentRecordObjectId);
 
             Anchor = new Anchor(owner, dataStream);
             Scale = Helpers.ReadVector3D(reader);

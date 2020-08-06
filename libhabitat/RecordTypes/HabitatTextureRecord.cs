@@ -11,8 +11,8 @@ namespace Habitat
 {
     public class HabitatTextureRecord : HabitatPropertyRecord
     {
-        public HabitatRecordReference<HabitatBitmapRecord> Bitmap;
-        public HabitatRecordReference<HabitatRecord> Palette;
+        public HabitatRecordReference<HabitatBitmapRecord> Bitmap = new HabitatRecordReference<HabitatBitmapRecord>();
+        public HabitatRecordReference<HabitatRecord> Palette = new HabitatRecordReference<HabitatRecord>();
 
         public float UOrigin = 0f;
         public float VOrigin = 0f;
@@ -24,12 +24,10 @@ namespace Habitat
             var reader = new BinaryReader(dataStream);
 
             int bitmapObjectId = reader.ReadInt32();
-            if (bitmapObjectId != 0)
-                Bitmap = new HabitatRecordReference<HabitatBitmapRecord>(owner, bitmapObjectId);
+            Bitmap = new HabitatRecordReference<HabitatBitmapRecord>(owner, bitmapObjectId);
 
             int paletteObjectId = reader.ReadInt32();
-            if (paletteObjectId != 0)
-                Palette = new HabitatRecordReference<HabitatRecord>(owner, paletteObjectId);
+            Palette = new HabitatRecordReference<HabitatRecord>(owner, paletteObjectId);
 
             UOrigin = reader.ReadSingle(); //assumed
             VOrigin = reader.ReadSingle(); //assumed

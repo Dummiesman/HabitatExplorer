@@ -10,7 +10,7 @@
         {
             get
             {
-                return (T)database.GetRecordByObjectId(ObjectId);
+                return (HasValue) ? (T)database.GetRecordByObjectId(ObjectId) : null;
             }
         }
 
