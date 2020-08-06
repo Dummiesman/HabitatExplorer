@@ -23,12 +23,13 @@ namespace HabitatExplorer
 
         public static void ClearPreview(Control parent)
         {
-            foreach (var control in parent.Controls)
+            foreach (Control control in parent.Controls)
             {
                 if (control is IPreviewer previewerControl)
                 {
                     previewerControl.Destroy();
                 }
+                control.Dispose();
             }
             parent.Controls.Clear();
         }
