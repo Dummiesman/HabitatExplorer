@@ -5,7 +5,7 @@ namespace Habitat
 {
     public class HabitatFolderRecord : HabitatPropertyRecord
     {
-        public List<HabitatRecordReference<HabitatRecord>> Children = new List<HabitatRecordReference<HabitatRecord>>();
+        public readonly List<HabitatRecordReference<HabitatRecord>> Children = new List<HabitatRecordReference<HabitatRecord>>();
 
         public HabitatFolderRecord(HabitatDatabase owner, Stream dataStream) : base(owner, dataStream)
         {
@@ -15,6 +15,7 @@ namespace Habitat
             for(int i=0; i < numChildren; i++)
             {
                 byte listDataType = reader.ReadByte(); // should be 0
+
                 int childObjectId = reader.ReadInt32();
                 if(childObjectId != 0)
                 {

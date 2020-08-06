@@ -5,7 +5,7 @@ namespace Habitat
 {
     public class HabitatPaletteRecord : HabitatRecord
     {
-        public List<Color32> Colors = new List<Color32>();
+        public readonly List<Color32> Colors = new List<Color32>();
 
         public HabitatPaletteRecord(HabitatDatabase owner, Stream dataStream) : base(owner, dataStream)
         {

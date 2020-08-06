@@ -8,7 +8,7 @@ namespace Habitat
         public HabitatProjectRecord(HabitatDatabase owner, Stream dataStream) : base(owner, dataStream)
         {
             //There's some additional things that a ProjectRecord has
-            //todo
+            //Could potentially add this later
         }
     }
 }

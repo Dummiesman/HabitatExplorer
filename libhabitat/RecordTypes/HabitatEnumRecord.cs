@@ -16,11 +16,11 @@ namespace Habitat
         {
             var reader = new BinaryReader(dataStream);
 
-            //these probably have some significance...
             int num1 = reader.ReadInt32();
-            DefaultValue = reader.ReadInt32();
 
+            DefaultValue = reader.ReadInt32(); //assumed
             int count = reader.ReadInt32();
+
             for(int i=0; i < count; i++)
             {
                 byte listItemType = reader.ReadByte(); //should be 0
