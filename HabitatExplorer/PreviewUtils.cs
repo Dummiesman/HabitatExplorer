@@ -10,12 +10,14 @@ namespace HabitatExplorer
     {
         private static Dictionary<HabitatRecordType, Type> previewerTypes = new Dictionary<HabitatRecordType, Type>()
         {
+            {HabitatRecordType.PropertyName , typeof(PropertyNamePreviewControl) },
             {HabitatRecordType.Palette , typeof(PalettePreviewControl) },
             {HabitatRecordType.Bitmap, typeof(BitmapPreviewControl) },
             {HabitatRecordType.Texture, typeof(TexturePreviewControl) },
             {HabitatRecordType.Project, typeof(NoPreviewControl) },
             {HabitatRecordType.Folder, typeof(NoPreviewControl) },
             {HabitatRecordType.Template, typeof(TemplatePreviewer) },
+            {HabitatRecordType.EnumRecord, typeof(EnumPreviewControl) },
             {HabitatRecordType.Object, typeof(TemplatePreviewer) }
         };
 

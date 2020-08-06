@@ -77,6 +77,12 @@
     <Compile Include="PopoutPreviewWindow.Designer.cs">
       <DependentUpon>PopoutPreviewWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Previewers\EnumPreviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Previewers\EnumPreviewControl.Designer.cs">
+      <DependentUpon>EnumPreviewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Previewers\IPreviewer.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -108,6 +114,12 @@
     <Compile Include="Previewers\PalettePreviewControl.Designer.cs">
       <DependentUpon>PalettePreviewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Previewers\PropertyNamePreviewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Previewers\PropertyNamePreviewControl.Designer.cs">
+      <DependentUpon>PropertyNamePreviewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Previewers\TemplatePreviewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +145,9 @@
     <EmbeddedResource Include="Previewers\BitmapPreviewControl.resx">
       <DependentUpon>BitmapPreviewControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Previewers\EnumPreviewControl.resx">
+      <DependentUpon>EnumPreviewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Previewers\HexPreviewControl.resx">
       <DependentUpon>HexPreviewControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Previewers\PalettePreviewControl.resx">
       <DependentUpon>PalettePreviewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Previewers\PropertyNamePreviewControl.resx">
+      <DependentUpon>PropertyNamePreviewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Previewers\TemplatePreviewerControl.resx">
       <DependentUpon>TemplatePreviewerControl.cs</DependentUpon>

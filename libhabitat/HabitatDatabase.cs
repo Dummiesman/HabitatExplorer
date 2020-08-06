@@ -106,6 +106,12 @@ namespace Habitat
                         HabitatRecord record = null;
                         switch (type)
                         {
+                            case HabitatRecordType.PropertyName:
+                                record = new HabitatPropertyNameRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                                break;
+                            case HabitatRecordType.EnumRecord:
+                                record = new HabitatEnumRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                                break;
                             case HabitatRecordType.Palette:
                                 record = new HabitatPaletteRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
                                 break;
