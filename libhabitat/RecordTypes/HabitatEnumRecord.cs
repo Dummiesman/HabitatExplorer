@@ -10,6 +10,7 @@ namespace Habitat
     public class HabitatEnumRecord : HabitatRecord
     {
         public readonly List<EnumValue> Values = new List<EnumValue>();
+        public int DefaultValue = 0;
 
         public HabitatEnumRecord(HabitatDatabase owner, Stream dataStream) : base(owner, dataStream)
         {
@@ -17,7 +18,7 @@ namespace Habitat
 
             //these probably have some significance...
             int num1 = reader.ReadInt32();
-            int num2 = reader.ReadInt32();
+            DefaultValue = reader.ReadInt32();
 
             int count = reader.ReadInt32();
             for(int i=0; i < count; i++)

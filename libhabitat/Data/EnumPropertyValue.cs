@@ -4,7 +4,7 @@ namespace Habitat
 {
     public class EnumPropertyValue
     {
-        public HabitatRecordReference<HabitatRecord> EnumRecord;
+        public HabitatRecordReference<HabitatEnumRecord> EnumRecord;
         public string Value;
         
         public EnumPropertyValue(HabitatDatabase owner, Stream dataStream)
@@ -14,7 +14,7 @@ namespace Habitat
 
             int recordObjectId = reader.ReadInt32();
             if (recordObjectId != 0)
-                EnumRecord = new HabitatRecordReference<HabitatRecord>(owner, recordObjectId);
+                EnumRecord = new HabitatRecordReference<HabitatEnumRecord>(owner, recordObjectId);
         }
     }
 }
