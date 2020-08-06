@@ -47,7 +47,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BinaryData.cs" />
     <Compile Include="Data\EnumPropertyValue.cs" />
+    <Compile Include="Data\EnumValue.cs" />
     <Compile Include="Data\Property.cs" />
     <Compile Include="Data\Color32.cs" />
     <Compile Include="Data\Face.cs" />
@@ -56,10 +58,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordTypes\Bases\RVModel.cs" />
     <Compile Include="RecordTypes\HabitatBitmapRecord.cs" />
+    <Compile Include="RecordTypes\HabitatEnumRecord.cs" />
     <Compile Include="RecordTypes\HabitatFolderRecord.cs" />
     <Compile Include="RecordTypes\HabitatObjectRecord.cs" />
     <Compile Include="RecordTypes\HabitatPaletteRecord.cs" />
     <Compile Include="RecordTypes\HabitatProjectRecord.cs" />
+    <Compile Include="RecordTypes\HabitatPropertyNameRecord.cs" />
     <Compile Include="RecordTypes\HabitatPropertyRecord.cs" />
     <Compile Include="RecordTypes\HabitatRecord.cs" />
     <Compile Include="Common\HabitatRecordReference.cs" />
