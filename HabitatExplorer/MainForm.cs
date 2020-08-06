@@ -168,7 +168,7 @@ namespace HabitatExplorer
         private void projectStructureTreeView_DoubleClick(object sender, EventArgs e)
         {
             var node = projectStructureTreeView.SelectedNode;
-            if (node.Tag is HabitatRecord record)
+            if (node.Tag is HabitatRecord record && record.Type != HabitatRecordType.Folder && record.Type != HabitatRecordType.Project)
                 DoubleClickHandler(record);
         }
 
