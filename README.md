@@ -1,2 +1,16 @@
 # HabitatExplorer
 A tool for exploring Probe Entertainment "Habitat" P3D files, used during the development of Re-Volt
+
+![The tool in action](preview.png)
+
+**About the Project**
+
+This project contains two C# projects within it. The viewer application, and libhabitat. libhabitat can be used  to work with Habitat files in any .NET application.
+
+**Project Status**
+
+Most of the major things are implemented. Enums, property names, and a few others aren't yet implemented.
+
+**Known Issues**
+
+The 3D viewer has a memory leak in it somewhere.
