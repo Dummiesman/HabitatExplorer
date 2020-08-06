@@ -35,9 +35,12 @@ namespace HabitatExplorer.Previewers
             }
             else if(record.DefaultValue.Type == typeof(EnumPropertyValue))
             {
-                var enumValue = (EnumPropertyValue)record.DefaultValue.Value;
-                string enumName = enumValue.EnumRecord?.Value?.Name ?? "ENUM_NOT_FOUND";
-                defaultvalueTextBox.Text = $"{enumName}.{enumValue.Value}";
+                var enumValueObj = (EnumPropertyValue)record.DefaultValue.Value;
+                var enumRecord = enumValueObj.EnumRecord?.Value;
+                string enumName = enumRecord?.Name ?? "ENUM_NOT_FOUND";
+                string enumValue = string.IsNullOrEmpty(enumValueObj.Value) ? enumRecord?.Values.FirstOrDefault(x => x.Value == enumRecord.DefaultValue).Name ?? "ENUM_NOT_FOUND" :
+                                                                              enumValueObj.Value;
+                defaultvalueTextBox.Text = $"{enumName}.{enumValue}";
             }
             else
             {

@@ -28,11 +28,18 @@ namespace HabitatExplorer.Previewers
             {
                 foreach(var value in enumRecord.Values)
                 {
-                    var item = new ListViewItem(value.Name)
+                    bool isDefault = (value.Value == enumRecord.DefaultValue);
+                    Color backgroundColor = isDefault ? Color.LightSeaGreen : Color.White;
+                    string itemName = isDefault ? $"{value.Name} (Default)" : value.Name;
+
+                    var item = new ListViewItem(itemName)
                     {
-                        UseItemStyleForSubItems = false
+                        UseItemStyleForSubItems = false,
+                        BackColor = backgroundColor
                     };
-                    item.SubItems.Add(value.Value.ToString());
+
+                    var valuePart = item.SubItems.Add(value.Value.ToString());
+                    valuePart.BackColor = backgroundColor;
 
                     var colorPart = item.SubItems.Add("");
                     colorPart.BackColor = value.Color.ToDrawingColorNoAlpha();
