@@ -34,6 +34,8 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.projectStructureTreeView = new System.Windows.Forms.TreeView();
             this.projectContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.preivewInNewWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exportAsBinaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyRawDataToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeViewIcons = new System.Windows.Forms.ImageList(this.components);
@@ -98,14 +100,29 @@
             this.projectStructureTreeView.Size = new System.Drawing.Size(208, 494);
             this.projectStructureTreeView.TabIndex = 7;
             this.projectStructureTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectStructureTreeView_AfterSelect);
+            this.projectStructureTreeView.DoubleClick += new System.EventHandler(this.projectStructureTreeView_DoubleClick);
             // 
             // projectContextMenu
             // 
             this.projectContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preivewInNewWindowToolStripMenuItem,
+            this.toolStripSeparator2,
             this.exportAsBinaryToolStripMenuItem,
             this.copyRawDataToClipboardToolStripMenuItem});
             this.projectContextMenu.Name = "projectContextMenu";
-            this.projectContextMenu.Size = new System.Drawing.Size(224, 48);
+            this.projectContextMenu.Size = new System.Drawing.Size(224, 76);
+            // 
+            // preivewInNewWindowToolStripMenuItem
+            // 
+            this.preivewInNewWindowToolStripMenuItem.Name = "preivewInNewWindowToolStripMenuItem";
+            this.preivewInNewWindowToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.preivewInNewWindowToolStripMenuItem.Text = "Preivew in New Window";
+            this.preivewInNewWindowToolStripMenuItem.Click += new System.EventHandler(this.preivewInNewWindowToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
             // 
             // exportAsBinaryToolStripMenuItem
             // 
@@ -202,6 +219,7 @@
             this.projectRecordsListView.UseCompatibleStateImageBehavior = false;
             this.projectRecordsListView.View = System.Windows.Forms.View.Details;
             this.projectRecordsListView.SelectedIndexChanged += new System.EventHandler(this.projectRecordsListView_SelectedIndexChanged);
+            this.projectRecordsListView.DoubleClick += new System.EventHandler(this.projectRecordsListView_DoubleClick);
             // 
             // columnHeader5
             // 
@@ -384,6 +402,8 @@
         private System.Windows.Forms.ToolStripMenuItem exportAsBinaryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyRawDataToClipboardToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ToolStripMenuItem preivewInNewWindowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

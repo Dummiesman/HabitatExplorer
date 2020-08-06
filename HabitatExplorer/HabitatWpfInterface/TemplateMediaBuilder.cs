@@ -152,7 +152,7 @@ namespace HabitatExplorer.HabitatWpfInterface
                 bitmap.Dispose();
 
                 //create material
-                var brush = new ImageBrush(bitmapSource);
+                var brush = new ImageBrush(bitmapSource) { TileMode = TileMode.None };
                 var material = new DiffuseMaterial(brush);
                 var mesh = builder.Value.ToMesh();
                 var visual = new ModelVisual3D() { Content = new GeometryModel3D { Geometry = mesh, Material = material }, Transform = ourTransform };

@@ -13,7 +13,8 @@ namespace HabitatExplorer
 {
     public partial class MainForm : Form
     {
-        private static string APPTITLE = "Habitat Explorer";
+        private const string APPTITLE = "Habitat Explorer";
+        private readonly List<Form> OpenPreviewForms = new List<Form>();
 
         public MainForm()
         {
@@ -33,10 +34,18 @@ namespace HabitatExplorer
         void LoadFile(string path)
         {
             var db = new HabitatDatabase(path);
-            
-            //clear any old preview
-            ClearPreview();
 
+            //clear any old preview
+            PreviewUtils.ClearPreview(previewGroupBox);
+
+            //close all preview forms
+            foreach(var form in OpenPreviewForms)
+            {
+                if (!form.IsDisposed)
+                    form.Close();
+            }
+            OpenPreviewForms.Clear();
+            
             //setup the raw list
             projectRecordsListView.Items.Clear();
             recordCountLabel.Text = $"{db.RecordCount} records total";
@@ -131,50 +140,38 @@ namespace HabitatExplorer
         }
 
         //Previews and selection handler
-        private static Dictionary<HabitatRecordType, Type> previewerTypes = new Dictionary<HabitatRecordType, Type>()
+        private void OpenPreviewWindow(HabitatRecord record)
         {
-            {HabitatRecordType.Palette , typeof(PalettePreviewControl) },
-            {HabitatRecordType.Bitmap, typeof(BitmapPreviewControl) },
-            {HabitatRecordType.Texture, typeof(TexturePreviewControl) },
-            {HabitatRecordType.Project, typeof(NoPreviewControl) },
-            {HabitatRecordType.Folder, typeof(NoPreviewControl) },
-            {HabitatRecordType.Template, typeof(TemplatePreviewer) },
-            {HabitatRecordType.Object, typeof(TemplatePreviewer) }
-        };
+            var previewer = new PopoutPreviewWindow();
+            previewer.Initialize(record);
+            previewer.Show();
+            OpenPreviewForms.Add(previewer);
+        }
 
-        private void ClearPreview()
+        private void DoubleClickHandler(HabitatRecord record)
         {
-            foreach (var control in previewGroupBox.Controls)
-            {
-                if (control is IPreviewer previewerControl)
-                {
-                    previewerControl.Destroy();
-                }
-            }
-            previewGroupBox.Controls.Clear();
+            OpenPreviewWindow(record);
         }
 
         private void RecordSelectHandler(HabitatRecord record)
         {
-            //
-            ClearPreview();
-
-            //create previewer
-            Type previewerType = null;
-            if(!previewerTypes.TryGetValue(record.Type, out previewerType))
-                previewerType = typeof(HexPreviewControl); //default fallback
-
-            if (previewerType != null)
-            {
-                Control previewerControl = (Control)Activator.CreateInstance(previewerType);
-                IPreviewer previewerInterface = previewerControl as IPreviewer;
-
-                previewerControl.Parent = previewGroupBox;
-                previewerControl.Dock = DockStyle.Fill;
-
-                previewerInterface.Initialize(record);
-            }
+            PreviewUtils.CreatePreview(record, previewGroupBox);
         }
+
+        private void projectRecordsListView_DoubleClick(object sender, EventArgs e)
+        {
+            var items = projectRecordsListView.SelectedItems;
+            if (items.Count > 0 && items[0].Tag is HabitatRecord record)
+                DoubleClickHandler(record);
+        }
+
+        private void projectStructureTreeView_DoubleClick(object sender, EventArgs e)
+        {
+            var node = projectStructureTreeView.SelectedNode;
+            if (node.Tag is HabitatRecord record)
+                DoubleClickHandler(record);
+        }
+
 
         private void projectStructureTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -248,6 +245,15 @@ namespace HabitatExplorer
             if (record != null)
             {
                 Clipboard.SetText(Utils.ByteArrayToHexString(record.RawData));
+            }
+        }
+
+        private void preivewInNewWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HabitatRecord record = GetContextTarget() as HabitatRecord;
+            if (record != null)
+            {
+                OpenPreviewWindow(record);   
             }
         }
     }

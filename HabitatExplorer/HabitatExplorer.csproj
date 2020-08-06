@@ -71,6 +71,12 @@
     <Compile Include="Export\HabitatExporter.cs" />
     <Compile Include="Export\ObjExportHelper.cs" />
     <Compile Include="HabitatWpfInterface\TemplateMediaBuilder.cs" />
+    <Compile Include="PopoutPreviewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopoutPreviewWindow.Designer.cs">
+      <DependentUpon>PopoutPreviewWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Previewers\IPreviewer.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -114,11 +120,15 @@
     <Compile Include="Previewers\TexturePreviewControl.Designer.cs">
       <DependentUpon>TexturePreviewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PreviewUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopoutPreviewWindow.resx">
+      <DependentUpon>PopoutPreviewWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Previewers\BitmapPreviewControl.resx">
       <DependentUpon>BitmapPreviewControl.cs</DependentUpon>
