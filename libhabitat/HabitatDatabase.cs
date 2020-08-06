@@ -74,72 +74,79 @@ namespace Habitat
             return null;
         }
 
+        private void AddRecordFromReader(OleDbDataReader reader)
+        {
+            int objectId = reader.GetInt32(0);
+            string name = reader.GetString(1);
+            HabitatRecordType type = (HabitatRecordType)reader.GetInt32(2);
+            var date = reader.GetDateTime(4);
+            byte[] data = (byte[])reader["Blob"];
+
+            using (var dataStream = new MemoryStream(data))
+            {
+                HabitatRecord record = null;
+                switch (type)
+                {
+                    case HabitatRecordType.PropertyName:
+                        record = new HabitatPropertyNameRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.EnumRecord:
+                        record = new HabitatEnumRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.Palette:
+                        record = new HabitatPaletteRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.Object:
+                        record = new HabitatObjectRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.Template:
+                        record = new HabitatTemplateRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.Project:
+                        record = new HabitatProjectRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.Folder:
+                        record = new HabitatFolderRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.Texture:
+                        record = new HabitatTextureRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    case HabitatRecordType.Bitmap:
+                        record = new HabitatBitmapRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                    default:
+                        record = new HabitatRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
+                        break;
+                }
+                AddRecord(record);
+            }
+        }
+
         public HabitatDatabase(string path)
         {
             string myConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;" +
                                         $"Data Source={path};" +
-                                         "Persist Security Info=True;" +
-                                         "Jet OLEDB:Database Password=myPassword;";
+                                         "Persist Security Info=True;";
 
             // Open OleDb Connection
-            OleDbConnection myConnection = new OleDbConnection();
-            myConnection.ConnectionString = myConnectionString;
-            myConnection.Open();
-
-            // Execute Queries
-            OleDbCommand cmd = myConnection.CreateCommand();
-            cmd.CommandText = "SELECT * FROM `HABITAT`";
-            OleDbDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection); // close conn after complete
-
-            if (reader.HasRows)
+            using(OleDbConnection myConnection = new OleDbConnection(myConnectionString))
             {
-                while (reader.Read())
-                {
-                    int objectId = reader.GetInt32(0);
-                    string name = reader.GetString(1);
-                    HabitatRecordType type = (HabitatRecordType)reader.GetInt32(2);
-                    var date = reader.GetDateTime(4);
-                    byte[] data = (byte[])reader["Blob"];
+                // Open connection
+                myConnection.Open();
 
-                    using (var dataStream = new MemoryStream(data))
+                // Execute Queries
+                OleDbCommand cmd = myConnection.CreateCommand();
+                cmd.CommandText = "SELECT * FROM `HABITAT`";
+                OleDbDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
                     {
-                        HabitatRecord record = null;
-                        switch (type)
-                        {
-                            case HabitatRecordType.PropertyName:
-                                record = new HabitatPropertyNameRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.EnumRecord:
-                                record = new HabitatEnumRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.Palette:
-                                record = new HabitatPaletteRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.Object:
-                                record = new HabitatObjectRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.Template:
-                                record = new HabitatTemplateRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.Project:
-                                record = new HabitatProjectRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.Folder:
-                                record = new HabitatFolderRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.Texture:
-                                record = new HabitatTextureRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            case HabitatRecordType.Bitmap:
-                                record = new HabitatBitmapRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                            default:
-                                record = new HabitatRecord(this, dataStream) { ModifiedDate = date, Name = name, ObjectId = objectId, RawData = data, Type = type };
-                                break;
-                        }
-                        AddRecord(record);
+                        AddRecordFromReader(reader);
                     }
                 }
+                reader.Close();
             }
             //done
         }
