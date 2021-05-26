@@ -27,13 +27,16 @@ namespace Habitat
             var reader = new BinaryReader(dataStream);
 
             int vertexCount = reader.ReadInt32();
+
             for (int i = 0; i < vertexCount; i++)
             {
                 byte listClassType = reader.ReadByte(); //0 or 1 (OR 2?)
                 int pinId = -1;
 
                 if (listClassType >= 1)
-                    reader.ReadInt32(); //? may be present if the value is 0 too. Don't know
+                {
+                    int val = reader.ReadInt32(); //? may be present if the value is 0 too. Don't know
+                }
                 if (listClassType == 2)
                     pinId = reader.ReadInt32(); //pin ID
               

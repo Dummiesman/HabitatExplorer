@@ -36,7 +36,6 @@ namespace Habitat
                 case 8: return 256;
                 default: return 0;
             }
-            return 0;
         }
 
         private int CalculateBitmapOffset()

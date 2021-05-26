@@ -61,11 +61,11 @@
             // exportButton
             // 
             this.exportButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exportButton.Location = new System.Drawing.Point(372, 0);
+            this.exportButton.Location = new System.Drawing.Point(442, 0);
             this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(189, 27);
+            this.exportButton.Size = new System.Drawing.Size(119, 27);
             this.exportButton.TabIndex = 0;
-            this.exportButton.Text = "Export as OBJ...";
+            this.exportButton.Text = "Export...";
             this.exportButton.UseVisualStyleBackColor = true;
             this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
@@ -75,14 +75,14 @@
             this.infoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.infoLabel.Location = new System.Drawing.Point(0, 0);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(372, 27);
+            this.infoLabel.Size = new System.Drawing.Size(442, 27);
             this.infoLabel.TabIndex = 1;
             this.infoLabel.Text = "ModelName | Object | 5 vertices | 5 faces | 5 children";
             this.infoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.Filter = "Wavefront OBJ|*.obj";
+            this.saveFileDialog.Filter = "glTF|*.gltf|Wavefront OBJ|*.obj";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
             // 
             // TemplatePreviewer

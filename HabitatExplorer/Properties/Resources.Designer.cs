@@ -61,7 +61,8 @@ namespace HabitatExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 2020-11-11 16:57:52.79 
+        ///.
         /// </summary>
         internal static string BuildDate {
             get {

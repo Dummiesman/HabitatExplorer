@@ -99,14 +99,21 @@ namespace HabitatExplorer.Previewers
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            var exporter = new HabitatExporter(model);
+            ExporterBase exporter = null;
+            if (saveFileDialog.FilterIndex == 1)
+                exporter = new GltfExporter(model);
+            else if (saveFileDialog.FilterIndex >= 2)
+                exporter = new Export.ObjExporter(model);
+
+            Console.WriteLine($"FilterIndex is {saveFileDialog.FilterIndex}, exporting with {exporter.GetType().Name}");
             exporter.Export(saveFileDialog.FileName);
 
             DialogResult result = MessageBox.Show("Do you want to export textures?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(result == DialogResult.Yes)
             {
+                var texporter = new TextureExporter(model);
                 string directory = new FileInfo(saveFileDialog.FileName).Directory.FullName;
-                exporter.ExportTextures(directory);
+                texporter.Export(directory);
             }
         }
     }

@@ -16,6 +16,8 @@ namespace HabitatExplorer
         private const string APPTITLE = "Habitat Explorer";
         private readonly List<Form> OpenPreviewForms = new List<Form>();
 
+        private List<HabitatRecordType> HideFromTreeView = new List<HabitatRecordType> { HabitatRecordType.Texture };
+
         public MainForm()
         {
             InitializeComponent();
@@ -31,7 +33,7 @@ namespace HabitatExplorer
         }
 
         //Load new project
-        void LoadFile(string path)
+        private void LoadFile(string path)
         {
             var db = new HabitatDatabase(path);
 
@@ -122,6 +124,9 @@ namespace HabitatExplorer
                 foreach(var child in record.Children)
                 {
                     var childValue = child.Value;
+                    if (HideFromTreeView.Contains(childValue.Type))
+                        continue;
+
                     if(childValue.Type != HabitatRecordType.Folder)
                     {
                         var childNode = recordNode.Nodes.Add(childValue.Name);
@@ -136,7 +141,6 @@ namespace HabitatExplorer
                 }
             }
             addFolderRecursive(null, (HabitatProjectRecord)projectRecord);
-            
         }
 
         //Previews and selection handler
@@ -210,7 +214,7 @@ namespace HabitatExplorer
         {
             string buildDate = HabitatExplorer.Properties.Resources.BuildDate;
             buildDate = buildDate.Trim();
-            MessageBox.Show($"{APPTITLE}\nCreated by Dummiesman\nBuild date: {buildDate}\n\nMakes use of Helix Toolkit, Copyright (c) 2019 Helix Toolkit contributors\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.", $"About {APPTITLE}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{APPTITLE}\nCreated by Dummiesman\nBuild date: {buildDate}\n\nMakes use of Helix Toolkit, Copyright (c) 2019 Helix Toolkit contributors\nMakes use of SharpGLTF, Copyright (c) 2019 Vicente Penades\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.", $"About {APPTITLE}", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Context Menu Stuff

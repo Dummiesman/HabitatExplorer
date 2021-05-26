@@ -127,6 +127,7 @@ namespace HabitatExplorer.HabitatWpfInterface
                 var whiteMaterial = MaterialHelper.CreateMaterial(Colors.White);
                 var defaultMesh = defaultMeshBuilder.ToMesh(true);
                 var defaultVisual = new ModelVisual3D() { Content = new GeometryModel3D { Geometry = defaultMesh, Material = whiteMaterial }, Transform = ourTransform };
+
                 returnList.Add(defaultVisual);
             }
 

@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+#if UNITY
+using UnityEngine;
+#else
+using System.Numerics;
+#endif
 
 namespace Habitat
 {
@@ -30,6 +31,11 @@ namespace Habitat
             return System.Drawing.Color.FromArgb(A, R, G, B);
         }
 #endif
+
+        public Vector4 ToVector4()
+        {
+            return new Vector4(R / 255f, G / 255f, B / 255f, A / 255f);
+        }
 
         public override int GetHashCode()
         {
