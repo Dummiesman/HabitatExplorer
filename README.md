@@ -14,7 +14,7 @@ This project contains two C# projects within it. The viewer application, and lib
 **Features**
 
 - Bitmap, palette, and texture mapping viewers
-- Exports OBJ models
+- glTF and OBJ exporting
 - Export textures and palettes
 - Allows the copy of the raw data to the clipboard
 
