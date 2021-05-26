@@ -9,7 +9,7 @@ This project contains two C# projects within it. The viewer application, and lib
 
 **Requirements**
 
-.NET Framework 4.6 or greater
+.NET Framework 4.7.1 or greater
 
 **Features**
 
